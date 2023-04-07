@@ -13,8 +13,24 @@
             <tr>
                 <th>图片</th>
                 <th>预测结果</th>
+                <th>更正结果</th>
             </tr>
         </thead>
         <tbody>
-
-
+            {% for result in results %}
+                <tr>
+                    <td><img src="{{ url_for('static', filename='uploads/' + result[0]) }}" alt="图片" width="100" height="100"></td>
+                    <td>{{ result[1] }}</td>
+                    <td>
+                        <form action="{{ url_for('correct_result', image_filename=result[0], predicted_label=result[1]) }}" method="POST">
+                            <input type="text" name="corrected_label" placeholder="更正物品名">
+                            <button type="submit">提交更正</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('core.index') }}">返回上传页面</a>
+</body>
+</html>
