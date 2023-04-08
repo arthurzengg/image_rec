@@ -30,8 +30,10 @@ def predict_image(model_path, image_array, labels):
     return labels[top_prediction]
 
 def recieve_image(image_path):
-    model_path = "/Users/arthurzeng/desktop/tensorflow/image_rec/web/tensorflow/model.tflite"
-    label_map_path = "/Users/arthurzeng/desktop/tensorflow/image_rec/web/tensorflow/labels.txt"
+    # model_path = "/Users/arthurzeng/desktop/tensorflow/image_rec/web/tensorflow/model.tflite"
+    # label_map_path = "/Users/arthurzeng/desktop/tensorflow/image_rec/web/tensorflow/labels.txt"
+    model_path = "/srv/image_rec/web/tensorflow/model.tflite"
+    label_map_path = "/srv/image_rec/web/tensorflow/labels.txt"
 
     # Load labels
     labels = load_labels(label_map_path)
