@@ -26,3 +26,19 @@ def upload():
             predicted_label_index = recieve_image(image_path)
             results.append((filename, predicted_label_index))
     return render_template('results.html', results=results)
+
+@core.route('/correct_result/<image_filename>/<predicted_label>', methods=['POST'])
+def correct_result(image_filename, predicted_label):
+    corrected_label = request.form['corrected_label']
+
+    # 根据用户输入的物品名称创建文件夹
+    target_folder = os.path.join('/srv/image_rec/web/training_data', corrected_label)
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
+
+    # 将图片移动到新文件夹中
+    source_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
+    target_path = os.path.join(target_folder, image_filename)
+    os.rename(source_path, target_path)
+
+    return render_template('index.html')
